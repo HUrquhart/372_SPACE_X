@@ -1,0 +1,505 @@
+
+/*===================================
+GENERAL RULES
+===================================*/
+*{ box-sizing: border-box;}
+
+.clear-fix::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+html{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  /* fluid typography */
+  font-size: calc(8pt + (14 - 8)*(100vw - 320px)/(1920-320));
+  color: #494949;
+  line-height: 1.285; /* 18pt */
+  letter-spacing: .05rem;
+}
+html, body{
+  padding: 0;
+  margin:0;
+}
+.wrapper{ padding: 15px;}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.copyright{
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.page{
+    position: relative;
+    /* while on mobile devices we should ensure our line legth is readble */
+    max-width: 70ch;
+    margin: 0 auto;
+}
+.page:not(:first-child){
+  border-top: 1px solid #333333
+}
+.page:not(:first-child){
+  padding-top: 40px;
+}
+#desk-tab-copyright-footer{
+  position: absolute;
+  bottom: 20px;
+}
+#mobile-footer,
+#desk-tab-copyright-footer{
+  color: #494949;
+  font-size: 10pt;
+  font-weight: 100;
+
+}
+.show{
+  display: inherit !important;
+}
+.hide{
+  display: none !important;
+}
+/*===================================
+LEFT HAND SIDE RULES
+===================================*/
+.fix-in-place{
+  width:100%;
+}
+header{
+  font-size: 1em
+  position: relative;
+  background-image: url("../images/1x/bg.png");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  display: block;
+  height: 100vh;
+  float: left;
+}
+.header-wrapper{
+  width:100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
+}
+.overlay{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0,0,0,.35);
+}
+
+.header-wrapper h1, 
+.header-wrapper h2{
+  font-family: 'Anton', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 20;
+}
+
+header .header-wrapper h1{
+  color: #fff;
+  font-size: calc(10pt + (20 - 10)*(100vw - 320px)/(1920 - 320));
+  line-height: 2.5;
+  margin-bottom: 0;
+}
+
+/* center on mobiles */
+header .header-wrapper h2{
+  color: #c1c1c1;
+  /* don't allow the hover to interact with the h2 so we can hover over our learnmore link */
+  pointer-events: none;
+  line-height: 1.1;
+  margin: 0 auto;
+  width: 13ch;
+  float: left;
+}
+/*===================================
+NAVIGATION AND TARGET NAV
+===================================*/
+
+nav{ /* fixed on mobiles */
+  margin-bottom: calc(15px + (50 - 15)*(100vw - 320px)/(1920 - 320));
+  padding: 20px 30px ;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  /* for scrolling on mobile */
+  -webkit-transition: all ease-out .5s;
+  -moz-transition: all ease-out .5s;
+  -o-transition: all ease-out .5s;
+  transition: all ease-out .5s;
+}
+#brand{float: left;}
+nav ul{
+  float:right;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+nav #menu > ul{
+  text-align: left;
+  text-transform: uppercase;
+}
+nav ul li{
+  list-style: none;
+  display: inline-block;
+  font-weight: 600;
+}
+nav ul li:not(:last-child){margin-right: 18px;}
+nav ul li:hover > a{color: #73d542;}
+nav > ul > li:not(:last-child){display: none;}
+
+.burger span{
+  display: block;
+  width: 24px;
+  margin-bottom: 5px;
+  border:1px solid white;
+}
+.burger span:last-child{margin-bottom: 0;}
+.burger{line-height: 24px; margin-bottom: -2px;}
+
+#menu{
+  float:left;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #333333;
+  transition: .3s;
+  display: none;
+  z-index: 99999;
+  top:0;
+  left: 0;
+}
+
+#menu ul{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#menu ul li{display: block;}
+#menu ul li a{
+  font-size: calc(30px + (60 - 30)*(100vw - 320px)/(800 - 320));
+  line-height: 1.05;
+  color: #c2c2c2;
+  pointer-events: all;
+}
+#menu ul li a:hover{color: #73d542;}
+#menu:target{
+  display: block;
+  pointer-events: none;
+}
+
+#menu a#close-menu{
+  color: white;
+  position: absolute;
+  top: 1em;
+  right: 2.5em;
+  z-index: 99999;
+  pointer-events: all;
+}
+#menu a#close-menu span:hover{
+  color: rgb(248, 64, 32);
+}
+.mobile-nav:hover .burger span{
+  border-color: #73d542;
+}
+#close-menu span{
+  color: #000;
+  font-size: 4rem;
+  margin: auto;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* brands for mobile initially shown */
+#brand-mobile{
+  display: inherit;
+}
+#brand-mobile-scrolled{
+  display: inherit;
+}
+#brand-desktop{
+  display: none;
+}
+/*===================================
+RIGHT HAND SIDE RULES
+===================================*/
+
+.multi-col-layout{
+  columns: 2;
+  column-gap: 35px;
+  margin-bottom: 50px;
+}
+
+.call-out{
+  font-size: calc(10pt + (35 - 10)*(100vw - 320px)/(1920 - 320));
+  line-height: 1.18;
+  font-weight: 100;
+  margin-bottom: 50px;
+}
+
+#previews article{
+  max-width: 70ch;
+  margin: 0 auto;
+}
+
+#previews article img{
+  width: 100%;
+}
+
+.header-wrapper{
+  padding: 70px 3rem;
+}
+/*===================================
+TABLET MEDIA QUERY
+===================================*/
+@media (min-width: 768px){ /* tablet */
+  .header-wrapper{ 
+    padding: 70px;
+  }
+  #brand-desktop{
+    display: inherit;
+  }
+  #brand-mobile,
+  #brand-mobile-scrolled{
+    display: none;
+  }
+  .page{
+    max-width:100%;
+    min-height: 100vh;
+  }
+  .burger span{
+    border: 1px solid #494949;
+  }
+  nav {
+    position: static;
+    padding: 40px 0 20px;
+  }
+  .wrapper{
+    width: 50%;
+    padding: 0px 70px 0;
+    display: block;
+    float: right;
+    min-height: 100vh;
+  }
+  .fix-in-place{
+    height: 100vh;
+    width:50%;
+    position: fixed;
+    float:left;
+  }
+
+  #previews{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  #previews article{
+    width: 31%;
+    max-width: 500px;
+  }
+  #previews article img{width: 100%;}
+  #mobile-footer{
+    display: none;
+  }
+}
+/*===================================
+DESKTOP MEDIA QUERY
+===================================*/
+@media (min-width: 1100px){
+  /* implementing the repsonsive content on the left side */
+  
+  nav > ul > li:not(:last-child){
+    display: inline-block;
+  }
+  
+}
+
+/*===================================
+OTHER MEDIA QUERIES
+===================================*/
+@media (min-width: 520px){
+  .header-wrapper{
+    font-size: calc(((100vw/30))/2);
+  }
+  .circle-wrapper{
+    z-index: 10;
+    position: absolute;
+    left: 16em; 
+  }  
+  .header-wrapper h2{
+    font-size: 2.5em;
+  } 
+}
+@media (max-width:519px){
+  /* stack the title and learn more anchor */
+  .header-wrapper{
+    font-size: calc(100vw/14);
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 70px 1em;
+  }
+  header .header-wrapper h2, header .header-wrapper h1{
+    text-align: center;
+    float: none;
+    display: block;
+  }
+  .circle-wrapper{
+    position: relative;
+    float: none;
+  }
+  .circle{
+    max-height: 3em;
+    max-width: 3em;
+  }
+}
+@media (max-width:767px){
+  /* while on the mobile make sure to separate the articles vetically */
+  #previews article{
+    margin-bottom: 50px;
+  }
+  #previews article img,
+  #previews article {
+    border-radius: 5px;
+  }
+  /* stack the title and learn more anchor */
+  header{
+    margin-bottom: 50px;
+  }
+  nav span{
+    border-color:white;
+  }
+  #copyright-footer{
+    position: fixed;
+    bottom: 0;
+  }
+  .nav-scrolled-bg{
+    background: #fff;
+    box-shadow: 0 0 10px #333333;
+  }
+  .next-arrow{
+    display: none;
+  }
+  /* give extra padding to menu on mobile devices */
+  nav #menu ul li {
+    margin: 15px 0;
+  }
+  #desk-tab-copyright-footer{
+    display: none;
+  }
+  #mobile-footer{
+    display: block;
+    text-align: center;
+  }
+}
+@media (max-width: 1200px){
+  .multi-col-layout{
+    column-count: 1;
+  }
+}
+@media (max-height: 50vw){
+  /* if the height gets to small remove the footer from  */
+  #desk-tab-copyright-footer{
+    display: none;
+  }
+  .next-arrow{
+    display: none;
+  }
+}
+
+/*===================================
+ARROW ANIMATIONS
+===================================*/
+.next-arrow{
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+}
+.next-arrow a span {
+  margin-top: -10px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  margin-left: -12px;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: arrow 2s infinite;
+  animation: arrow 2s infinite;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+@-webkit-keyframes arrow {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    -webkit-transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+  }
+}S
+@keyframes arrow {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  20% {
+    transform: rotate(-45deg) translate(-10px, 10px);
+  }
+  40% {
+    transform: rotate(-45deg) translate(0, 0);
+  }
+} 
+
+/**************************************************************************************/
+
+.learn-more{
+  color: #000;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 2px;
+  /* font-size: calc(16pt + (32 - 16)*(100vw - 320px)/(1920 - 320)); */
+  line-height: 1;
+}
+
+/* https://stackoverflow.com/questions/25983273/css-edit-circle-with-multiline */
+/* multiline text in a circle thanks to user Aru on stack overflow */
+.circle {
+  background: none repeat scroll 0 0 #fff;
+  border-radius: 50%;
+  display: table-cell;
+  min-height: 7.5em;
+  height:7.5em;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  min-width: 7.5em;
+  width: 7.5em;
+  transition: 0.3s;
+}
+.circle:hover{background: #73d542;}
+
+.header-wrapper table td{
+  text-align: center;
+  background-color: transparent;
+}
+.circle-wrapper table,
+.circle-wrapper table tbody tr td > a{
+  margin: 0 auto;
+}
